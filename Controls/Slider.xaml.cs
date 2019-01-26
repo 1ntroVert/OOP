@@ -27,9 +27,9 @@ namespace Controls
             typeof(Slider),
             new PropertyMetadata(0.0, new PropertyChangedCallback(ValueChanged)));
 
-        private static void ValueChanged(DependencyObject sender, DependencyPropertyChangedEventArgs args)
+        private static void ValueChanged(DependencyObject obj, DependencyPropertyChangedEventArgs args)
         {
-            var slider = sender as Slider;
+            var slider = obj as Slider;
             slider.ValueChanged();
         }
 
@@ -58,6 +58,5 @@ namespace Controls
             typeof(Slider),
             new PropertyMetadata(100.0));
         #endregion
-
     }
 }
