@@ -11,13 +11,13 @@
             <ColumnDefinition Width="0*" Name="LeftColumn"/>
             <ColumnDefinition Width="1*" Name="RightColumn"/>
         </Grid.ColumnDefinitions>
-        <Border Grid.Column="0">
-            <Border.Background>
+        <Rectangle Grid.Column="0">
+            <Rectangle.Fill>
                 <LinearGradientBrush EndPoint="0,0" StartPoint="1,1">
                     <GradientStop Color="Cyan" Offset="0"/>
                     <GradientStop Color="Blue" Offset="1"/>
                 </LinearGradientBrush>
-            </Border.Background>
-        </Border>
+            </Rectangle.Fill>
+        </Rectangle>
     </Grid>
 </UserControl>
