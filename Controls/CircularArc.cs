@@ -28,15 +28,17 @@ namespace Controls
             set { SetValue(AngleProperty, value); }
         }
 
-        public static readonly DependencyProperty AngleProperty =
-            DependencyProperty.Register("Angle", typeof(double), typeof(CircularArc), valueMetadata);
+        public static readonly DependencyProperty AngleProperty = DependencyProperty.Register(
+            "Angle",
+            typeof(double),
+            typeof(CircularArc),
+            AngleMetadata);
 
-        private static FrameworkPropertyMetadata valueMetadata =
-            new FrameworkPropertyMetadata(
+        private static FrameworkPropertyMetadata AngleMetadata = new FrameworkPropertyMetadata(
                 0.0,
                 FrameworkPropertyMetadataOptions.AffectsRender,
                 null,
-                new CoerceValueCallback(CoerceValue));
+                CoerceValue);
 
         private static object CoerceValue(DependencyObject obj, object value)
         {
@@ -62,15 +64,15 @@ namespace Controls
                 double xEnd = maxWidth / 2.0 * Math.Cos(endAngle * Math.PI / 180.0);
                 double yEnd = maxHeight / 2.0 * Math.Sin(endAngle * Math.PI / 180.0);
 
-                StreamGeometry geom = new StreamGeometry();
-                using (StreamGeometryContext ctx = geom.Open())
+                StreamGeometry geometry = new StreamGeometry();
+                using (StreamGeometryContext context = geometry.Open())
                 {
-                    ctx.BeginFigure(
+                    context.BeginFigure(
                         new Point((RenderSize.Width / 2.0) + xStart,
                                   (RenderSize.Height / 2.0) - yStart),
                         true,  
                         false);
-                    ctx.ArcTo(
+                    context.ArcTo(
                         new Point((RenderSize.Width / 2.0) + xEnd,
                                   (RenderSize.Height / 2.0) - yEnd),
                         new Size(maxWidth / 2.0, maxHeight / 2),
@@ -81,7 +83,7 @@ namespace Controls
                         false);
                 }
 
-                return geom;
+                return geometry;
             }
         }
     }

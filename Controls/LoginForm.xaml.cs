@@ -24,9 +24,9 @@ namespace Controls
         public LoginForm()
         {
             InitializeComponent();
-            LoginTextBox.TextChanged += LoginTextBox_TextChanged;
-            PasswordBox.PasswordChanged += PasswordBox_PasswordChanged;
-            OkButton.Click += OkButton_Click;
+            LoginTextBox.TextChanged += LoginTextBox_TextChanged; // назначение обработчика изменения логина 
+            PasswordBox.PasswordChanged += PasswordBox_PasswordChanged; // назначение обработчика изменения пароля 
+            OkButton.Click += OkButton_Click; // назначение обработчика нажатия кнопки подтверждения
         }
 
         public string Login
@@ -41,10 +41,10 @@ namespace Controls
         }
 
         public static readonly DependencyProperty LoginProperty = DependencyProperty.Register(
-            "Login",
-            typeof(string),
-            typeof(LoginForm),
-             new PropertyMetadata(string.Empty, LoginChanged));
+            "Login", // имя параметра в разметке
+            typeof(string), // тип данных параметра
+            typeof(LoginForm), // тип данных элемента управления
+            new PropertyMetadata(string.Empty, LoginChanged)); // метаданные - значение параметра по умолчанию и обработчик изменения параметра
 
         private static void LoginChanged(DependencyObject obj, DependencyPropertyChangedEventArgs args)
         {
@@ -59,16 +59,18 @@ namespace Controls
 
         private void PasswordBox_PasswordChanged(object sender, RoutedEventArgs e)
         {
-            validateData();
+            // TODO : need action
         }
 
         private void LoginTextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
-            validateData();
+            // TODO : need action
         }
 
         private void validateData()
         {
+            // длина логина должна быть не менее 4 символов,
+            // а длина пароля - не менее 8 символов
             bool isDataValid = Login.Length >= 4 && Password.Length >= 8;
             if (isDataValid)
                 OkButton.IsEnabled = true;
