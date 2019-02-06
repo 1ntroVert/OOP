@@ -24,10 +24,10 @@ namespace ClassesAndObjects
         {
             InitializeComponent();
 
-            drawLine(10, 10, 10, 290);
-            drawLine(10, 290, 290, 290);
-            drawLine(290, 290, 290, 10);
-            drawLine(290, 10, 10, 10);
+            drawLine(10, 10, 10, 190);
+            drawLine(10, 190, 190, 190);
+            drawLine(190, 190, 190, 10);
+            drawLine(190, 10, 10, 10);
         }
 
         private void drawLine(int x1, int y1, int x2, int y2)
@@ -48,6 +48,11 @@ namespace ClassesAndObjects
 
             // добавление линии в холст (линия добавляется в список "дочерних" элементов холста)
             canvas.Children.Add(line);
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }
