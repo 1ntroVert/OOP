@@ -8,38 +8,7 @@
         Title="MainWindow" Height="450" Width="800">
 
     <Grid>
-        <!--<DataGrid x:Name="datagrid">
-            <DataGrid.Resources>
-                <DataTemplate DataType="{x:Type local:Book}">
-                    <Grid>
-                        <Label Content="{Binding Title}"/>
-                    </Grid>
-                </DataTemplate>
-                <DataTemplate DataType="{x:Type local:Disk}">
-                    <Grid>
-                        <Label Content="{Binding Price}"/>
-                    </Grid>
-                </DataTemplate>
-                <Style TargetType="{x:Type DataGridCell}">
-                    <Setter Property="ContentTemplate">
-                        <Setter.Value>
-                            <DataTemplate>
-                                <ContentControl Content="{Binding}" />
-                            </DataTemplate>
-                        </Setter.Value>
-                    </Setter>
-                </Style>
-            </DataGrid.Resources>
-        </DataGrid>-->
-        <!--<DataGrid Height="179" HorizontalAlignment="Left" Margin="54,65,0,0" Name="datagrid" VerticalAlignment="Top" Width="382">
-            <DataGrid.Columns>
-                <DataGridTextColumn Header="ID"/>
-                <DataGridTextColumn Header="ViewCount" />
-                <DataGridTextColumn Header="Title" />
-            </DataGrid.Columns>
-        </DataGrid>-->
-
-        <DataGrid Name="datagrid" AutoGenerateColumns="false">
+        <DataGrid Name="datagrid" AutoGenerateColumns="false" Margin="0,88,0,0">
             <DataGrid.Columns>
                 <DataGridTextColumn Binding="{Binding Title}" Header="Название"/>
                 <DataGridTextColumn Binding="{Binding Price}" Header="Цена"/>
@@ -47,6 +16,7 @@
                 <DataGridTextColumn Binding="{Binding AdditionalInfo}" Header="Доп. информация"/>
             </DataGrid.Columns>
         </DataGrid>
-
+        <Button Content="Создать диск" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="92" Click="Button_Click"/>
+        <Button Content="Удалить товар" HorizontalAlignment="Left" Margin="107,10,0,0" VerticalAlignment="Top" Width="92" Click="DeleteButton_Click"/>
     </Grid>
 </Window>

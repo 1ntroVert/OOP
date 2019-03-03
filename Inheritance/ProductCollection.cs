@@ -1,25 +1,36 @@
 ﻿using System.Collections.Generic;
+using System.Collections.ObjectModel;
 
 namespace Inheritance
 {
     class ProductCollection
     {
         private DataStorage dataStorage;
-        private List<Product> products = new List<Product>();
+        private ObservableCollection<Product> products = new ObservableCollection<Product>();
 
         public ProductCollection(DataStorage dataStorage)
         {
             this.dataStorage = dataStorage;
         }
         
-        public List<Product> GetProducts()
+        public ObservableCollection<Product> GetProducts()
         {
             return products;
         }
 
         public void LoadProducts()
         {
-            products = dataStorage.LoadProducs();
+            products = new ObservableCollection<Product>(dataStorage.LoadProducs());
+        }
+
+        public void AddProduct(Product product)
+        {
+            products.Add(product);
+        }
+
+        public void RemoveProduct(Product product)
+        {
+            products.Remove(product);
         }
     }
 }
