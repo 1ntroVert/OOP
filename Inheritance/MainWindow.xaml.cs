@@ -32,5 +32,10 @@ namespace Inheritance
             var selectedProduct = (Product)datagrid.SelectedItem; // выбранный товар
             productCollection.RemoveProduct(selectedProduct);
         }
+
+        private void TreeView_SelectedItemChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
+        {
+
+        }
     }
 }

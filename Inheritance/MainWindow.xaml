@@ -8,7 +8,7 @@
         Title="MainWindow" Height="450" Width="800">
 
     <Grid>
-        <DataGrid Name="datagrid" AutoGenerateColumns="false" Margin="0,88,0,0">
+        <DataGrid Name="datagrid" AutoGenerateColumns="false" Margin="0,177,0,0">
             <DataGrid.Columns>
                 <DataGridTextColumn Binding="{Binding Title}" Header="Название"/>
                 <DataGridTextColumn Binding="{Binding Price}" Header="Цена"/>
@@ -16,7 +16,18 @@
                 <DataGridTextColumn Binding="{Binding AdditionalInfo}" Header="Доп. информация"/>
             </DataGrid.Columns>
         </DataGrid>
-        <Button Content="Создать диск" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="92" Click="Button_Click"/>
-        <Button Content="Удалить товар" HorizontalAlignment="Left" Margin="107,10,0,0" VerticalAlignment="Top" Width="92" Click="DeleteButton_Click"/>
+        <Button Content="Создать диск" HorizontalAlignment="Left" Margin="266,10,0,0" VerticalAlignment="Top" Width="92" Click="Button_Click"/>
+        <Button Content="Удалить товар" HorizontalAlignment="Left" Margin="370,10,0,0" VerticalAlignment="Top" Width="92" Click="DeleteButton_Click"/>
+        <TreeView Height="Auto" Margin="9,10,538,299" SelectedItemChanged="TreeView_SelectedItemChanged">
+            <TreeViewItem Header="Товары">
+                <TreeViewItem Header="Книги">
+                    <TreeViewItem Header="Книги по программированию"/>
+                    <TreeViewItem Header="Кулинарные книги"/>
+                    <TreeViewItem Header="Словари"/>
+                </TreeViewItem>
+                <TreeViewItem Header="Диски">
+                </TreeViewItem>
+            </TreeViewItem>
+        </TreeView>
     </Grid>
 </Window>
