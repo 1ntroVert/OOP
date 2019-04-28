@@ -21,10 +21,13 @@ namespace GMap
             MapObjects.Remove(obj);
         }
 
-        public void Draw(GMapControl map)
+        public IEnumerable<GMapMarker> Markers
         {
-            foreach (MapObject obj in MapObjects)
-                map.Markers.Add(obj.GetDrawableMarker());
+            get
+            {
+                return MapObjects.Select(obj => obj.Marker);
+            }
         }
+       
     }
 }

@@ -23,8 +23,16 @@ namespace GMap
     /// </summary>
     public partial class MainWindow : Window
     {
-        private const int DEFAULT_ZOOM = 14;
         private MapObjectCollection MapObjectCollection = new MapObjectCollection();
+
+        Route route;
+        Car car;
+        Human i = new Human("Вася Пупкин", new PointLatLng(55.001841257855773, 82.980337142944336));
+
+        bool fromClicked = false;
+        bool toClicked = false;
+        PointLatLng from;
+        PointLatLng to;
 
         public MainWindow()
         {
@@ -43,18 +51,12 @@ namespace GMap
                 new PointLatLng(55.016363, 82.950350),
                 new PointLatLng(55.015180, 82.948833) }.ToList()));
 
-            RoutingProvider routingProvider = GMapProviders.OpenStreetMap;
 
-            MapRoute route = routingProvider.GetRoute(
-                new PointLatLng(55.016789, 82.944568),
-                new PointLatLng(55.029888, 82.921444),
-                false,
-                false,
-                DEFAULT_ZOOM);
-
-            GMapRoute gmRoute = new GMapRoute(route.Points);
-
-            MapObjectCollection.Add(new Route("Музей Октябрьского района - Площадь Ленина", route.Points));
+            car = new Car("Reno Logan", new PointLatLng(55.008683394217464, 83.044366836547852));
+            car.Arrived += i.CarArrived;
+            car.Moved += Car_Moved;
+            MapObjectCollection.Add(car);
+            MapObjectCollection.Add(i);
         }
 
         private void MapLoaded(object sender, RoutedEventArgs e)
@@ -66,14 +68,84 @@ namespace GMap
             // установка зума и расположения
             Map.MinZoom = 2;
             Map.MaxZoom = 17;
-            Map.Zoom = DEFAULT_ZOOM;
-            Map.Position = new PointLatLng(55.012823, 82.950359);
+            Map.Zoom = 12;
+            Map.Position = new PointLatLng(55.001841257855773, 82.980337142944336);
             // настройка взаимодействия с картой
             Map.MouseWheelZoomType = MouseWheelZoomType.MousePositionAndCenter;
             Map.CanDragMap = true;
             Map.DragButton = MouseButton.Left;
 
-            MapObjectCollection.Draw(Map);
+            foreach (var marker in MapObjectCollection.Markers)
+                Map.Markers.Add(marker);
+
+            List<PointLatLng> points = new PointLatLng[] {
+                new PointLatLng(55.015963, 82.946845),
+                new PointLatLng(55.016607, 82.947543),
+                new PointLatLng(55.016363, 82.950350),
+                new PointLatLng(55.015180, 82.948833) }.ToList();
+
+        }
+
+        private void Car_Moved(object sender, EventArgs e)
+        {
+            Map.Position = (sender as Car).Point;
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            fromClicked = true;
+            toClicked = false;
+            Map.Cursor = Cursors.Cross;
+            checkBox.IsEnabled = true;
+        }
+
+        private void CheckBox_Checked_1(object sender, RoutedEventArgs e)
+        {
+            if (checkBox.IsChecked == true)
+            {
+                from = i.Point;
+                From.Content = i.Point.ToString();
+                Map.Cursor = Cursors.Arrow; 
+            }
+        }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            fromClicked = false;
+            toClicked = true;
+            Map.Cursor = Cursors.Cross;
+        }
+
+        private void Button_Click_2(object sender, RoutedEventArgs e)
+        {
+            route = new Route("-", Utils.buildRoute(from, to));
+            Map.Markers.Add(route.Marker);
+            i.DestinationPoint = to;
+            Map.Zoom = Utils.DEFAULT_ZOOM;
+            car.MoveTo(from);
+        }
+
+        private void Map_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            double lat = Map.FromLocalToLatLng((int)e.GetPosition(Map).X, (int)e.GetPosition(Map).Y).Lat; // широта
+            double lng = Map.FromLocalToLatLng((int)e.GetPosition(Map).X, (int)e.GetPosition(Map).Y).Lng; // долгота
+
+            if (fromClicked)
+            {
+                from = new PointLatLng(lat, lng);
+                From.Content = from.ToString();
+            }
+            if (toClicked)
+            {
+                to = new PointLatLng(lat, lng);
+                To.Content = to.ToString();
+            }
+            Map.Cursor = Cursors.Arrow;
+        }
+
+        private void Map_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+
         }
     }
 }

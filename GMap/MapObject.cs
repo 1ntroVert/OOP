@@ -10,7 +10,7 @@ namespace GMap
     abstract class MapObject
     {
         public string Title { get; set; }
-        public abstract GMapMarker GetDrawableMarker();
+        public abstract GMapMarker Marker { get; }
 
         protected MapObject(string title)
         {

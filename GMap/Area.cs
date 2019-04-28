@@ -20,17 +20,14 @@ namespace GMap
             Points = points;
         }
 
-        public override GMapMarker GetDrawableMarker()
+        public override GMapMarker Marker => new GMapPolygon(Points)
         {
-            return new GMapPolygon(Points)
+            Shape = new Path
             {
-                Shape = new Path
-                {
-                    Stroke = Brushes.Black,
-                    Fill = Brushes.LightSeaGreen,
-                    Opacity = 0.5
-                }
-            };
-        }
+                Stroke = Brushes.Black,
+                Fill = Brushes.LightSeaGreen,
+                Opacity = 0.5
+            }
+        };
     }
 }

@@ -12,7 +12,7 @@ using System.Windows.Shapes;
 
 namespace GMap
 {
-    class Location: MapObject
+    class Location : MapObject
     {
         public PointLatLng Point { get; private set; }
 
@@ -21,18 +21,15 @@ namespace GMap
             Point = point;
         }
 
-        public override GMapMarker GetDrawableMarker()
+        public override GMapMarker Marker => new GMapMarker(Point)
         {
-            return new GMapMarker(Point)
+            Shape = new Image
             {
-                Shape = new Image
-                {
-                    Width = 32,
-                    Height = 32,
-                    ToolTip = Title,
-                    Source = new BitmapImage(new Uri("pack://application:,,,/Resources/marker.png"))
-                }
-            };
-        }
+                Width = 32,
+                Height = 32,
+                ToolTip = Title,
+                Source = new BitmapImage(new Uri("pack://application:,,,/Resources/marker.png"))
+            }
+        };
     }
 }

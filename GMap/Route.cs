@@ -20,17 +20,14 @@ namespace GMap
             Points = points;
         }
 
-        public override GMapMarker GetDrawableMarker()
+        public override GMapMarker Marker => new GMapRoute(Points)
         {
-            return new GMapRoute(Points)
+            Shape = new Path()
             {
-                Shape = new Path()
-                {
-                    Stroke = Brushes.LightSeaGreen,
-                    Fill = Brushes.LightSeaGreen,
-                    StrokeThickness = 4
-                }
-            };
-        }
+                Stroke = Brushes.LightSeaGreen,
+                Fill = Brushes.LightSeaGreen,
+                StrokeThickness = 4
+            }
+        };
     }
 }

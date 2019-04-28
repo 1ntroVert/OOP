@@ -4,10 +4,14 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:GMap"
-        xmlns:gmaps="clr-namespace:GMap.NET.WindowsPresentation;assembly=GMap.NET.WindowsPresentation"
+        xmlns:WindowsPresentation="clr-namespace:GMap.NET.WindowsPresentation;assembly=GMap.NET.WindowsPresentation"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
-        <gmaps:GMapControl x:Name="Map" Loaded="MapLoaded"/>
+        <WindowsPresentation:GMapControl Name="Map" Loaded="MapLoaded" MouseDoubleClick="Map_MouseDoubleClick" MouseLeftButtonDown="Map_MouseLeftButtonDown" Margin="0, 120, 0, 0"/>
+        <Button Name="From" Content="Откуда" HorizontalAlignment="Left" VerticalAlignment="Top" Width="160" Click="Button_Click" Height="65"/>
+        <Button  Name="To" Content="Куда" HorizontalAlignment="Left" VerticalAlignment="Top" Width="160" Click="Button_Click_1" Height="65" Margin="165,0,0,0"/>
+        <CheckBox x:Name="checkBox" Content="Мое местоположение" HorizontalAlignment="Left" Margin="0,70,0,0" VerticalAlignment="Top" Checked="CheckBox_Checked_1" Width="160" IsEnabled="False"/>
+        <Button  x:Name="To_Copy" Content="Вызвать" HorizontalAlignment="Left" VerticalAlignment="Top" Width="160" Click="Button_Click_2" Height="65" Margin="330,0,0,0"/>
     </Grid>
 </Window>
